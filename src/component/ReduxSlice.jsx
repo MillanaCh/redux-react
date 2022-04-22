@@ -1,33 +1,32 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 
-export const callTheApi = createAsyncThunk('api/users', async(obj, error) => {
+export const callToAPI = createAsyncThunk('api/users',async(obj,{state,error})=>{
     try{
-        const request = await fetch('https://gorest.co.in/public/v2/users') 
-        const response = request.json()
-        return response
-    }catch(err){
-        console.log(err.message)
+          const req = await fetch('https://fakestoreapi.com/products')
+          const res = await req.json()
+          return res
+    }catch(error){
+        console.log(error)
         return []
     }
 })
 
 const userSlice = createSlice({
     name:"users",
-    initialState: [], 
-    reducers: {}, 
+    initialState:[],
+    reducers:{},
     extraReducers:{
-        [callTheApi.pending] : (state, action) => {
+        [callToAPI.pending]:(state,action)=>{
             return []
         },
-        [callTheApi.fulfilled] : (state, action) => {
+        [callToAPI.fulfilled]:(state,action)=>{
             return action.payload
         },
-        [callTheApi.rejected] : (state, action) => {
+        [callToAPI.rejected]:(state,action)=>{
             return []
-        },
+        }
     }
 })
-export const actions = userSlice.actions;
-export default userSlice
 
-// "https://gorest.co.in/public/v2/users"
+export const actions = userSlice.actions;
+export default userSlice ;

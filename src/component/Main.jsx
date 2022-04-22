@@ -1,16 +1,45 @@
-import { useEffect } from "react";
-import {useSelector, useDispatch} from "react-redux"
-import {callTheApi} from "./ReduxSlice"
-function Main(){
-    const dispatch = useDispatch()
-    const data = useSelector((state) => state)
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { callToAPI } from "./ReduxSlice";
 
-    useEffect(() => {
-        dispatch(callTheApi())
-    }, [])
-    console.log(data)
-    return(
-        <h1>This is Main</h1>
-    )
+import {
+  Grid,
+  Card,
+  CardActionArea,
+  Typography,
+  CardContent,
+  CardMedia,
+  CircularProgress,
+  Box,
+} from "@mui/material";
+
+function Main() {
+  const [allUsersData, setAllUsersData] = useState([]);
+
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state);
+  console.log(data);
+  useEffect(() => {
+    dispatch(callToAPI());
+    setAllUsersData(data);
+  }, []);
+
+  return (
+    <>
+          <Grid container spacing={2}>
+          {allUsersData?.map((el) => {
+            return (
+              <Grid item xs={3} md={3} key={el.id}>
+                <Card sx={{ maxWidth: 300 }}>
+                  <CardActionArea>
+                    <h3>{el.title}</h3>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
+    </>
+  );
 }
-export default Main
+export default Main;
