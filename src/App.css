@@ -1,16 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap');
-.header-flex{
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+.header-flex {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
-h3, h5{
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 15px;
+h3,
+h5 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 17px;
   margin-bottom: 8px;
 }
-p{
-  font-family: 'Josefin Sans', sans-serif;
+p {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 16px;
 }
-
+.element-flex {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.element-flex p {
+  color: #2b6ef5;
+  padding-right: 10px;
+}
+.header-name {
+  font-family: "Indie Flower", cursive;
+  font-size: 35px;
+}
+.element-flex h3 {
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+}
