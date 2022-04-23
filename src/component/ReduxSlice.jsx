@@ -2,7 +2,7 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 
 export const callToAPI = createAsyncThunk('api/users',async(obj,{state,error})=>{
     try{
-          const req = await fetch('https://fakestoreapi.com/products')
+          const req = await fetch('https://api.sampleapis.com/wines/reds')
           const res = await req.json()
           return res
     }catch(error){
@@ -30,3 +30,4 @@ const userSlice = createSlice({
 
 export const actions = userSlice.actions;
 export default userSlice ;
+// https://fakestoreapi.com/products

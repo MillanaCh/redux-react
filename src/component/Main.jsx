@@ -5,23 +5,21 @@ import { callToAPI } from "./ReduxSlice";
 import {
   Grid,
   Card,
-  CardActionArea,
-  Typography,
-  CardContent,
-  CardMedia,
-  CircularProgress,
-  Box,
+  CardActionArea
 } from "@mui/material";
 
 function Main() {
   const [allUsersData, setAllUsersData] = useState([]);
-
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
-  console.log(data);
+  console.log(data)
+  
+  useEffect(() =>{
+    setAllUsersData(data)
+  }, [data])
+
   useEffect(() => {
-    dispatch(callToAPI());
-    setAllUsersData(data);
+    dispatch(callToAPI())
   }, []);
 
   return (
