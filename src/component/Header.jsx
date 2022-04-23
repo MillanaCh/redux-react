@@ -4,7 +4,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="ui-menu-fixed">
-          <h2>FakeShop</h2>
+          <h2>Cartoon Rating</h2>
       </div>
     );
   }
