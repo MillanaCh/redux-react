@@ -1,4 +1,16 @@
-.ui-menu-fixed {
-  height: 60px;
-  padding-top: 15px;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap');
+.header-flex{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+h3, h5{
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+p{
+  font-family: 'Josefin Sans', sans-serif;
+}
+

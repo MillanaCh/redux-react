@@ -12,8 +12,7 @@ import {
 } from "@mui/material";
 
 function Main() {
-  const [selectedCartoon, setSelectedCartoon] = useState([])
-  console.log(selectedCartoon)
+  const [selectedCartoon, setSelectedCartoon] = useState([]);
   // Modal page
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -21,7 +20,7 @@ function Main() {
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
-  // console.log(data);
+  console.log(data);
 
   useEffect(() => {
     dispatch(callToAPI());
@@ -38,49 +37,58 @@ function Main() {
     border: "none",
     borderRadius: "5px",
     p: 4,
+    textAlign: "center",
   };
 
   return (
     <Grid container spacing={2}>
       {data?.map((el, index) => (
         <>
-          <Grid item xs={3} md={3} sx={{ textAlign: "center" }} key={index} onClick={handleOpen}>
-            <Card sx={{ maxWidth: 300 }}  onClick={() => setSelectedCartoon(el)}>
+          <Grid
+            item
+            xs={3}
+            md={2}
+            sx={{ textAlign: "center" }}
+            key={index}
+            onClick={handleOpen}
+          >
+            <Card sx={{ maxWidth: 300 }} onClick={() => setSelectedCartoon(el)}>
               <CardActionArea>
                 <img src={el.image} height="250px" />
-                <Typography gutterBottom variant="h5" component="div">
-                  {el.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {el.creator[0]}
-                </Typography>
+                <h3>{el.title}</h3>
+                <p>
+                  Program creator: <h3>{el.creator[0]}</h3>
+                </p>
               </CardActionArea>
             </Card>
           </Grid>
         </>
       ))}
-       <div>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  <img src={selectedCartoon.image} height="250px" />
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                   {selectedCartoon.title}
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    {/* Genre: {el.genre} */}
-                  </Typography>
-                </Box>
-              </Modal>
-          </div>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <img src={selectedCartoon.image} height="250px" />
+            <h2>{selectedCartoon.title}</h2>
+            <div>
+              <p>First episode year:</p>
+              <h3>{selectedCartoon.year}</h3>
+            </div>
+            <div>
+              <p>Episodes:</p>
+              <h5>{selectedCartoon.episodes}</h5>
+            </div>
+            <div>
+              <p>One episode: </p>
+              <h5>{selectedCartoon.runtime_in_minutes}</h5>
+            </div>
+          </Box>
+        </Modal>
+      </div>
     </Grid>
   );
 }
