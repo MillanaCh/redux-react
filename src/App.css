@@ -34,3 +34,15 @@ p {
   font-family: "Quicksand", sans-serif;
   font-size: 15px;
 }
+/* Input */
+.input-div {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.input-search {
+  width: 300px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid #3072f1;
+}

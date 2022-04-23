@@ -19,6 +19,8 @@ function Main() {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+  // Search part
+  const [filteredFoodList, setFilteredFoodList] = useState([]);
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
@@ -28,8 +30,8 @@ function Main() {
     dispatch(callToAPI());
   }, []);
   setTimeout(() => {
-    setLoading(false)
-  }, 2000)
+    setLoading(false);
+  }, 2000);
   // Style part
   const style = {
     position: "absolute",
@@ -43,15 +45,22 @@ function Main() {
     p: 4,
     textAlign: "center",
   };
+
   // https://logolook.net/wp-content/uploads/2021/07/Nickelodeon-Logo.svg
-// https://static.cdnlogo.com/logos/n/16/nickelodeon.svg
+  // https://static.cdnlogo.com/logos/n/16/nickelodeon.svg
   return (
     <>
       {loading ? (
-        <img src="https://logolook.net/wp-content/uploads/2021/07/Nickelodeon-Logo.svg" width="100%"/>
+        <img
+          src="https://logolook.net/wp-content/uploads/2021/07/Nickelodeon-Logo.svg"
+          width="100%"
+        />
       ) : (
         <>
           <Header />
+          <div className="input-div">
+            <input className="input-search"/>
+          </div>
           <Grid container spacing={2}>
             {data?.map((el, index) => (
               <>
@@ -68,7 +77,7 @@ function Main() {
                     onClick={() => setSelectedCartoon(el)}
                   >
                     <CardActionArea>
-                      <img src={el.image} height="250px" />
+                      <img src={el.image} height="260px" />
                       <h3 style={{ color: "#fbad00" }}>{el.title}</h3>
                       <p>
                         Program creator: <h4>{el.creator[0]}</h4>
