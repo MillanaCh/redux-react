@@ -6,18 +6,19 @@ import {
   Card,
   Modal,
   Box,
+  Paper,
   Typography,
   CardActionArea,
 } from "@mui/material";
 
 function Main() {
-  const [selectedCartoon, setSelectedCartoon] = useState([]);
+  const [selectedCartoon, setSelectedCartoon] = useState([])
+  console.log(selectedCartoon)
   // Modal page
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
   // console.log(data);
@@ -43,15 +44,8 @@ function Main() {
     <Grid container spacing={2}>
       {data?.map((el, index) => (
         <>
-          <Grid
-            item
-            xs={3}
-            md={3}
-            sx={{ textAlign: "center" }}
-            key={index}
-            onClick={() => toogleModal(el.id)}
-          >
-            <Card sx={{ maxWidth: 300 }} onClick={handleOpen}>
+          <Grid item xs={3} md={3} sx={{ textAlign: "center" }} key={index} onClick={handleOpen}>
+            <Card sx={{ maxWidth: 300 }}  onClick={() => setSelectedCartoon(el)}>
               <CardActionArea>
                 <img src={el.image} height="250px" />
                 <Typography gutterBottom variant="h5" component="div">
@@ -63,26 +57,30 @@ function Main() {
               </CardActionArea>
             </Card>
           </Grid>
-          <div>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <img src={el.image} height="250px" />
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  {el.title}
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Genre: {el.genre}
-                </Typography>
-              </Box>
-            </Modal>
-          </div>
         </>
       ))}
+       <div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <img src={selectedCartoon.image} height="250px" />
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                   {selectedCartoon.title}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    {/* Genre: {el.genre} */}
+                  </Typography>
+                </Box>
+              </Modal>
+          </div>
     </Grid>
   );
 }
