@@ -11,39 +11,21 @@ import {
 } from "@mui/material";
 
 function Main() {
-  // const [allUsersData, setAllUsersData] = useState();
-  const [selectedCartoon, setSelectedCartoon] = useState();
+  const [selectedCartoon, setSelectedCartoon] = useState([]);
   // Modal page
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  let toogleModal = (id) => {
-    setOpen(true);
-    const selectedActor = data.filter((actor) => actor.id === id);
-    setSelectedCartoon(selectedActor[0].id);
-  };
-  // Redux
+  
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
-  console.log(data)
-
-  // useEffect(() => {
-  //   setAllUsersData(data);
-  // }, [data]);
+  // console.log(data);
 
   useEffect(() => {
     dispatch(callToAPI());
   }, []);
 
-  // if(loading){
-  //   return <h1>Millana</h1>
-  // }
-
-  // useEffect(function toogleModal(id){
-  //   const selectedActor = allUsersData.filter((actor) => actor.id === id)
-  //   setSelectedCartoon(selectedActor)
-  // }, [selectedCartoon])
   // Style part
   const style = {
     position: "absolute",
@@ -58,55 +40,50 @@ function Main() {
   };
 
   return (
-    <>
-      <Grid container spacing={2}>
-        {data?.map((el) => (
-          <>
-            <Grid
-              item
-              xs={3}
-              md={3}
-              sx={{ textAlign: "center" }}
-              key={el.id}
-              onClick={() => toogleModal(el.id)}
-            >
-              <Card sx={{ maxWidth: 300 }} onClick={handleOpen}>
-                <CardActionArea>
-                  <img src={el.image} height="250px" />
-                  <Typography gutterBottom variant="h5" component="div">
-                    {el.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {el.creator[0]}
-                  </Typography>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          </>
-        ))}
-
-        <div>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+    <Grid container spacing={2}>
+      {data?.map((el, index) => (
+        <>
+          <Grid
+            item
+            xs={3}
+            md={3}
+            sx={{ textAlign: "center" }}
+            key={index}
+            onClick={() => toogleModal(el.id)}
           >
-            {data.map(el => el.id === selectedCartoon) ? (
-            <Box sx={style}>
-              <img src={el.image} height="250px" />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                {/* {selectedCartoon[0].title} */}
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {/* Genre: {selectedCartoon[0].genre} */}
-              </Typography>
-            </Box>
-             ): null}
-          </Modal>
-        </div>
-      </Grid>
-    </>
+            <Card sx={{ maxWidth: 300 }} onClick={handleOpen}>
+              <CardActionArea>
+                <img src={el.image} height="250px" />
+                <Typography gutterBottom variant="h5" component="div">
+                  {el.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {el.creator[0]}
+                </Typography>
+              </CardActionArea>
+            </Card>
+          </Grid>
+          <div>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <img src={el.image} height="250px" />
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  {el.title}
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  Genre: {el.genre}
+                </Typography>
+              </Box>
+            </Modal>
+          </div>
+        </>
+      ))}
+    </Grid>
   );
 }
 export default Main;
