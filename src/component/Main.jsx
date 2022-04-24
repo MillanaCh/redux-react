@@ -7,31 +7,32 @@ import {
   Card,
   Modal,
   Box,
-  Paper,
-  Typography,
   CardActionArea,
 } from "@mui/material";
 import { debounce } from "lodash";
 
 function Main() {
-  const [selectedCartoon, setSelectedCartoon] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  // Redux part
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(callToAPI());
   }, []);
+
+  // Loading part
+  const [loading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
   }, 2000);
 
   // Modal page
+  const [selectedCartoon, setSelectedCartoon] = useState([]);
+  
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
-  // Modal Style part
+  // Modal page style part
   const style = {
     position: "absolute",
     top: "50%",
@@ -48,7 +49,7 @@ function Main() {
   // Search part
   const [searched, setSearched] = useState();
   const [lengthSearch, setLengthSearch] = useState(0);
-  
+
   const handlerOnChange = debounce((e) => {
     const filteredCartoons = data.filter((cartoon) => {
       if (cartoon.title.slice(0, e.target.value.length) === e.target.value) {
