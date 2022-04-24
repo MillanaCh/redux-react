@@ -6,6 +6,7 @@ import { Grid, Card, Modal, Box, CardActionArea } from "@mui/material";
 import { debounce } from "lodash";
 
 function Main() {
+
   // Redux part
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
@@ -49,7 +50,7 @@ function Main() {
       if (cartoon.title.slice(0, e.target.value.length) === e.target.value) {
         return cartoon;
       }
-    });
+    })
     setSearched(filteredCartoons);
     setLengthSearch(e.target.value.length);
   }, 500);
@@ -67,8 +68,7 @@ function Main() {
   let end = start + howManyElPerPage;
   let dataCopy = [...data]
   const pagination = dataCopy.slice(start, end);
-  // https://logolook.net/wp-content/uploads/2021/07/Nickelodeon-Logo.svg
-  // https://static.cdnlogo.com/logos/n/16/nickelodeon.svg
+
   return (
     <>
       {loading ? (
@@ -195,6 +195,7 @@ function Main() {
                   </Modal>
                 </div>
               </Grid>
+              {/* Pagination Part */}
               <div className="btnPageAll">
                 {arrayBtn.map((el, index) => {
                   return (
