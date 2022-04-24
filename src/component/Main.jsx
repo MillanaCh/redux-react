@@ -55,9 +55,9 @@ function Main() {
       }
     });
     setSearched(filteredCartoons);
-    setLengthSearch(filteredCartoons[0].title.length)
+    setLengthSearch(e.target.value.length)
   }, 500);
-
+ 
   useEffect(() => {
     handlerOnChange()
   }, [searched])
