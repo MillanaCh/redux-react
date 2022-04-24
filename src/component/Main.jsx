@@ -46,11 +46,12 @@ function Main() {
   };
 
   // Search part
-  const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState();
   const [lengthSearch, setLengthSearch] = useState(0);
+  
   const handlerOnChange = debounce((e) => {
     const filteredCartoons = data.filter((cartoon) => {
-      if (cartoon.title === e.target.value) {
+      if (cartoon.title.slice(0, e.target.value.length) === e.target.value) {
         return cartoon;
       }
     });
