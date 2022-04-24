@@ -46,3 +46,16 @@ p {
   border-radius: 7px;
   border: 1px solid #3072f1;
 }
+/* btn page pagination */
+.btnPage{
+  border: none;
+  border-radius: 4px;
+  background-color: #fbad00;
+  color:white;
+  margin: 8px;
+  width: 30px;
+  height: 30px;
+}
+.btnPageAll{
+  text-align: center;
+}
