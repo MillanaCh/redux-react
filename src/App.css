@@ -61,3 +61,16 @@ p {
 .btnPageAll{
   text-align: center;
 }
+/* Footer part */
+.footer-part{
+  background-color: #8f9092;
+  color:white;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-part a{
+  color:white
+}
+

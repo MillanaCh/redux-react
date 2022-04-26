@@ -4,6 +4,7 @@ import { callToAPI } from "./ReduxSlice";
 import Header from "./Header";
 import { Grid, Card, Modal, Box, CardActionArea } from "@mui/material";
 import { debounce } from "lodash";
+import Footer from "./Footer";
 
 function Main() {
 
@@ -64,10 +65,16 @@ function Main() {
   let howManyPage = Math.ceil(data.length / howManyElPerPage);
   const arrayBtn = new Array(howManyPage).fill("btnPage");
   const [pageNow, setPageNow] = useState(0);
-  let start = pageNow * howManyElPerPage;
+  let getLocal = localStorage.getItem("pageNow");
+  let start = getLocal * howManyElPerPage;
   let end = start + howManyElPerPage;
   let dataCopy = [...data]
   const pagination = dataCopy.slice(start, end);
+
+  const handlerPage = (index) => {
+    setPageNow(index)
+    localStorage.setItem('pageNow', index);
+  }
 
   return (
     <>
@@ -201,14 +208,16 @@ function Main() {
                   return (
                     <button
                       className="btnPage"
-                      onClick={() => setPageNow(index)}
-                      key={index + el}
+                      onClick={() => handlerPage(index)}
+                      key={index}
                     >
                       {index + 1}
                     </button>
                   );
                 })}
               </div>
+              <div style={{height:"40vh"}}></div>
+              <Footer/>
             </>
           )}
         </>
